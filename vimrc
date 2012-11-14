@@ -72,6 +72,7 @@ Bundle 'ervandew/supertab'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'mileszs/ack.vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'fs111/pydoc.vim'
@@ -121,7 +122,9 @@ let g:SuperTabDefaultCompletionType = 'context'
 set completeopt=menuone,longest,preview
 
 " NERD tree
-map <leader>n :NERDTreeToggle<CR>
+"" map <leader>n :NERDTreeToggle<CR>
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
+
 "" ignnore .pyc files
 let NERDTreeIgnore = ['\.pyc$']
 
@@ -271,5 +274,6 @@ vmap <C-C> "+y
 
 " PYTHON MODE
 " disable breakpoint because CommandT is using <leader>b
+let g:pymode_indent = 1
 let g:pymode_breakpoint=0
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
