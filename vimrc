@@ -11,7 +11,7 @@ set foldlevel=99
 let mapleader = ","
 
 set wildignore+=*.pyc
-
+set wildignore+=*.o,*.obj,.git,*.pyc,static/**
 
 set selectmode=
 " normal backspace behavour
@@ -23,6 +23,9 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
+
+nnoremap <silent> + :exe "resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> - :exe "resize " . (winwidth(0) * 2/3)<CR>
 
 " cursor keys to move to next and previous tab
 map <c-left> :tabprev<CR>
@@ -87,6 +90,7 @@ Bundle 'othree/html5.vim'
 Bundle 'robhudson/snipmate_for_django'
 Bundle 'jhchabran/vim-pigraph'
 Bundle 'scrooloose/syntastic'
+Bundle 'mklabs/vim-issues'
 " original git repos
 "
 " To properly install "command-t" don't forget to compile the C-extension
@@ -122,8 +126,8 @@ let g:SuperTabDefaultCompletionType = 'context'
 set completeopt=menuone,longest,preview
 
 " NERD tree
-"" map <leader>n :NERDTreeToggle<CR>
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
+map <leader>n :NERDTreeToggle<CR>
+"" map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 "" ignnore .pyc files
 let NERDTreeIgnore = ['\.pyc$']
@@ -219,6 +223,32 @@ set undodir=~/.vim/undo//
 "   n... : where to save the viminfo files
 set viminfo='10,\"100,:20,%,n~/.viminfo
 
+" when we reload, tell vim to restore the cursor to the saved position
+augroup JumpCursorOnEdit
+    au!
+    autocmd BufReadPost *
+    \ if expand("<afile>:p:h") !=? $TEMP |
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \ let JumpCursorOnEdit_foo = line("'\"") |
+    \ let b:doopenfold = 1 |
+    \ if (foldlevel(JumpCursorOnEdit_foo) > foldlevel(JumpCursorOnEdit_foo - 1)) |
+    \ let JumpCursorOnEdit_foo = JumpCursorOnEdit_foo - 1 |
+    \ let b:doopenfold = 2 |
+    \ endif |
+    \ exe JumpCursorOnEdit_foo |
+    \ endif |
+    \ endif
+    " Need to postpone using "zv" until after reading the modelines.
+    autocmd BufWinEnter *
+    \ if exists("b:doopenfold") |
+    \ exe "normal zv" |
+    \ if(b:doopenfold > 1) |
+    \ exe "+".1 |
+    \ endif |
+    \ unlet b:doopenfold |
+    \ endif
+augroup END
+
 " vim7.3+ has colorcolumn support - otherwise fake it
 "             ^-  highlight linelenghts exceeding XX
 if exists('+colorcolumn')
@@ -276,4 +306,5 @@ vmap <C-C> "+y
 " disable breakpoint because CommandT is using <leader>b
 let g:pymode_indent = 1
 let g:pymode_breakpoint=0
+let g:pymode_lint_ignore = "E128,E126"
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
