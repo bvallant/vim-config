@@ -69,28 +69,24 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-git'
 Bundle 'msanders/snipmate.vim'
 Bundle 'ervandew/supertab'
-"Bundle 'fholgado/minibufexpl.vim'
-" Bundle 'https://github.com/rygwdn/rope-omni.git'
-" Bundle 'sontek/rope-vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'mileszs/ack.vim'
 Bundle 'sjl/gundo.vim'
-Bundle 'fs111/pydoc.vim'
+" Bundle 'fs111/pydoc.vim'
 Bundle 'alfredodeza/pytest.vim'
 Bundle 'reinh/vim-makegreen'
-Bundle 'vim-scripts/pep8'
+" Bundle 'vim-scripts/pep8'
 Bundle 'vim-scripts/TaskList.vim'
 Bundle 'vim-scripts/vimwiki'
 Bundle 'klen/python-mode'
+Bundle 'davidhalter/jedi-vim'
 Bundle 'othree/html5.vim'
-"Bundle 'kevinw/yflakes-vim'
 Bundle 'robhudson/snipmate_for_django'
 Bundle 'jhchabran/vim-pigraph'
-Bundle 'scrooloose/syntastic'
-Bundle 'mklabs/vim-issues'
+
+" Bundle 'mklabs/vim-issues'
 " original git repos
 "
 " To properly install "command-t" don't forget to compile the C-extension
@@ -279,8 +275,8 @@ set guioptions-=T
 au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 au FileType html set omnifunc=htmlcomplete#CompleteTags
 au FileType css set omnifunc=csscomplete#CompleteCSS
-" au FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType python setlocal omnifunc=RopeCompleteFunc
+au FileType python set omnifunc=pythoncomplete#Complete
+au FileType php set omnifunc=phpcomplete#CompletePHP
 " robhudson's django snipmate bundle includes lots of
 " snippets. If you are not working a lot with django
 " and django/jinja templates, comment the following
@@ -306,5 +302,12 @@ vmap <C-C> "+y
 " disable breakpoint because CommandT is using <leader>b
 let g:pymode_indent = 1
 let g:pymode_breakpoint=0
-let g:pymode_lint_ignore = "E128,E126"
+let g:pymode_lint_write = 1   " enable code checking on every save
+let g:pymode_run = 0          " Dont load the python run code within vim plugin
+let g:pymode_lint_onfly = 0   " dont run code checking on the fly
+let g:pymode_lint_ignore = "E127,E128,E123,E124"  " I have an indent style that
+let g:pymode_rope = 1  " We have JEDI now!
+
+let g:jedi#related_names_command = "<leader>e"
+
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
