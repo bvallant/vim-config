@@ -268,6 +268,7 @@ endif
 " seems to be a bug, have to add them all first to remove them later on
 set guioptions+=LlRrb
 set guioptions-=LlRrb
+set fillchars=vert:│
 
 " Omni Completion
 au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
