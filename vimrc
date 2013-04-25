@@ -67,25 +67,24 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 " GIT Syntax
 Bundle 'tpope/vim-git'
-Bundle 'msanders/snipmate.vim'
-Bundle 'ervandew/supertab'
+" Bundle 'ervandew/supertab'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'mileszs/ack.vim'
 Bundle 'sjl/gundo.vim'
 " Bundle 'fs111/pydoc.vim'
-Bundle 'alfredodeza/pytest.vim'
-Bundle 'reinh/vim-makegreen'
 " Bundle 'vim-scripts/pep8'
-Bundle 'vim-scripts/TaskList.vim'
+" Bundle 'vim-scripts/TaskList.vim'
 Bundle 'vim-scripts/vimwiki'
 Bundle 'klen/python-mode'
-Bundle 'davidhalter/jedi-vim'
+" Bundle 'davidhalter/jedi-vim'
 Bundle 'othree/html5.vim'
-Bundle 'robhudson/snipmate_for_django'
-Bundle 'jhchabran/vim-pigraph'
-
+"Bundle 'robhudson/snipmate_for_django'
+" Bundle 'jhchabran/vim-pigraph'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'flazz/vim-colorschemes'
+Bundle 'SirVer/ultisnips'
 " Bundle 'mklabs/vim-issues'
 " original git repos
 "
@@ -112,10 +111,6 @@ let g:pyflakes_use_quickfix = 0
 
 " python pep8 violations in quickfix window
 let g:pep8_map='<leader>8'
-
-" SuperTab lets us use tab for autocompletion in
-" insert mode
-let g:SuperTabDefaultCompletionType = 'context'
 
 " pydoc preview :D
 " <leader>pw opens pydoc for current module
@@ -256,7 +251,8 @@ endif
 " Color Scheme
 set background=dark
 if has("gui_running")
-    colorscheme torte
+    "colorscheme torte
+    colorscheme deveiate
     set guifont=Monospace\ 10  " use this font 
     " set guifont='Menlo-Powerline'\ 10  " use this font 
     set lines=50       " height = 50 lines
@@ -268,8 +264,10 @@ endif
 
 " GUI Options (MacVim/gVim)
 " set guifont=Monospace:h10.00
-" hide the toolbar
-set guioptions-=T
+" hide the toolbar, scrollbars etc...
+" seems to be a bug, have to add them all first to remove them later on
+set guioptions+=LlRrb
+set guioptions-=LlRrb
 
 " Omni Completion
 au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
@@ -311,3 +309,5 @@ let g:pymode_rope = 1  " We have JEDI now!
 let g:jedi#related_names_command = "<leader>e"
 
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+" YouCompleteMe should not clash with UltiSnip's key mappings
+let g:ycm_key_list_select_completion = ['<Down>']
