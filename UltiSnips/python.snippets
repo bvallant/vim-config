@@ -1,3 +1,12 @@
 snippet ipdb "Set IPDB breakpoint" b
 import ipdb; ipdb.set_trace()
 endsnippet
+
+snippet _ "ugettext_lazy"
+_('$1')
+endsnippet
+
+snippet ugettext_lazy "import ugettext_lazy"
+from django.utils.translation import ugettext_lazy as _
+endsnippet
+
