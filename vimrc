@@ -266,8 +266,8 @@ endif
 " set guifont=Monospace:h10.00
 " hide the toolbar, scrollbars etc...
 " seems to be a bug, have to add them all first to remove them later on
-set guioptions+=LlRrb
-set guioptions-=LlRrb
+set guioptions+=TLlRrbm
+set guioptions-=TLlRrbm
 set fillchars=vert:│
 
 " Omni Completion
