@@ -63,6 +63,7 @@ Bundle 'gmarik/vundle'
 "
 " GIT integration
 Bundle 'tpope/vim-fugitive'
+Bundle 'junegunn/vim-github-dashboard'
 " Deal with pairs of surroundings
 Bundle 'tpope/vim-surround'
 " GIT Syntax
@@ -71,6 +72,7 @@ Bundle 'tpope/vim-git'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'mileszs/ack.vim'
 Bundle 'sjl/gundo.vim'
 " Bundle 'fs111/pydoc.vim'
@@ -117,8 +119,8 @@ let g:pep8_map='<leader>8'
 set completeopt=menuone,longest,preview
 
 " NERD tree
-map <leader>n :NERDTreeToggle<CR>
-"" map <Leader>n <plug>NERDTreeTabsToggle<CR>
+" map <leader>n :NERDTreeToggle<CR>
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 "" ignnore .pyc files
 let NERDTreeIgnore = ['\.pyc$']
@@ -292,7 +294,7 @@ imap jj <Esc>
 let g:Powerline_symbols = 'fancy'
 
 " COPY AND PASTE
-nmap <C-V> "+gP
+nmap <C-V> "+gp
 imap <C-V> <ESC><C-V>i
 vmap <C-C> "+y
 
@@ -312,3 +314,11 @@ let g:jedi#related_names_command = "<leader>e"
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 " YouCompleteMe should not clash with UltiSnip's key mappings
 let g:ycm_key_list_select_completion = ['<Down>']
+
+" Move lines with alt j/k
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
