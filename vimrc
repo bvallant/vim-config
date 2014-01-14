@@ -63,7 +63,7 @@ Bundle 'gmarik/vundle'
 "
 " GIT integration
 Bundle 'tpope/vim-fugitive'
-Bundle 'junegunn/vim-github-dashboard'
+" Bundle 'junegunn/vim-github-dashboard'
 " Deal with pairs of surroundings
 Bundle 'tpope/vim-surround'
 " GIT Syntax
@@ -72,7 +72,7 @@ Bundle 'tpope/vim-git'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'jistr/vim-nerdtree-tabs'
+" Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'mileszs/ack.vim'
 Bundle 'sjl/gundo.vim'
 " Bundle 'fs111/pydoc.vim'
@@ -119,16 +119,11 @@ let g:pep8_map='<leader>8'
 set completeopt=menuone,longest,preview
 
 " NERD tree
-" map <leader>n :NERDTreeToggle<CR>
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
+map <leader>n :NERDTreeToggle<CR>
+"map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 "" ignnore .pyc files
 let NERDTreeIgnore = ['\.pyc$']
-
-" Python Rope
-map <leader>j :RopeGotoDefinition<CR>
-map <leader>r :RopeRename<CR>
-imap <c-space> <C-R>=RopeCodeAssistInsertMode()<CR>
 
 " ACK plugin :) (grep but with lot more awesome)
 nmap <leader>a <Esc>:Ack!
@@ -255,7 +250,7 @@ set background=dark
 if has("gui_running")
     "colorscheme torte
     colorscheme deveiate
-    set guifont=Monospace\ 10  " use this font 
+    set guifont=Ubuntu\ Mono\ Regular\ 11  " use this font 
     " set guifont='Menlo-Powerline'\ 10  " use this font 
     set lines=50       " height = 50 lines
     set columns=100        " width = 100 columns
@@ -301,6 +296,8 @@ vmap <C-C> "+y
 
 " PYTHON MODE
 " disable breakpoint because CommandT is using <leader>b
+let g:pymode_virtualenv = 1
+let g:pymode_doc = 1
 let g:pymode_indent = 1
 let g:pymode_breakpoint=0
 let g:pymode_lint_write = 1   " enable code checking on every save
@@ -308,6 +305,7 @@ let g:pymode_run = 0          " Dont load the python run code within vim plugin
 let g:pymode_lint_onfly = 0   " dont run code checking on the fly
 let g:pymode_lint_ignore = "E127,E128,E123,E124"  " I have an indent style that
 let g:pymode_rope = 1  " We have JEDI now!
+let g:pymode_rope_goto_definition_bind = '<leader>j'
 
 let g:jedi#related_names_command = "<leader>e"
 
