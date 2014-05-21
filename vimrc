@@ -13,6 +13,8 @@ let mapleader = ","
 set wildignore+=*.pyc
 set wildignore+=*.o,*.obj,.git,*.pyc,static/**
 
+set shell=/bin/bash
+
 set selectmode=
 " normal backspace behavour
 set backspace=indent,eol,start
@@ -62,6 +64,7 @@ Bundle 'gmarik/vundle'
 " ===============
 "
 " GIT integration
+Bundle 'joker1007/vim-metarw-github-issues'
 Bundle 'tpope/vim-fugitive'
 " Bundle 'junegunn/vim-github-dashboard'
 " Deal with pairs of surroundings
@@ -74,6 +77,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 " Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'mileszs/ack.vim'
+Bundle 'ervandew/screen'
 Bundle 'sjl/gundo.vim'
 " Bundle 'fs111/pydoc.vim'
 " Bundle 'vim-scripts/pep8'
@@ -87,6 +91,10 @@ Bundle 'othree/html5.vim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'flazz/vim-colorschemes'
 Bundle 'SirVer/ultisnips'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'wavded/vim-stylus'
+Bundle 'honza/vim-snippets'
+"Bundle 'jtrain/django-tmux'
 " Bundle 'mklabs/vim-issues'
 " original git repos
 "
@@ -304,6 +312,7 @@ let g:pymode_lint_write = 1   " enable code checking on every save
 let g:pymode_run = 0          " Dont load the python run code within vim plugin
 let g:pymode_lint_onfly = 0   " dont run code checking on the fly
 let g:pymode_lint_ignore = "E127,E128,E123,E124"  " I have an indent style that
+let g:pymode_rope_completion = 0 
 let g:pymode_rope = 1  " We have JEDI now!
 let g:pymode_rope_goto_definition_bind = '<leader>j'
 
