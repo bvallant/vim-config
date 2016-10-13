@@ -15,6 +15,9 @@ set wildignore+=*.o,*.obj,.git,*.pyc,static/**
 
 set shell=/bin/bash
 
+set incsearch
+set hlsearch
+
 set selectmode=
 " normal backspace behavour
 set backspace=indent,eol,start
@@ -28,6 +31,10 @@ map <c-h> <c-w>h
 
 nnoremap <silent> + :exe "resize " . (winwidth(0) * 3/2)<CR>
 nnoremap <silent> - :exe "resize " . (winwidth(0) * 2/3)<CR>
+
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
 
 " cursor keys to move to next and previous tab
 map <c-left> :tabprev<CR>
@@ -90,6 +97,8 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
 Bundle 'reinh/vim-makegreen'
 Bundle 'jmcomets/vim-pony'
+Bundle 'drmikehenry/vim-fontsize'
+Bundle 'editorconfig/editorconfig-vim'
 
 filetype plugin indent on     " required for Vundle 
 
@@ -115,7 +124,7 @@ map <leader>n :NERDTreeToggle<CR>
 "map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 "" ignnore .pyc files
-let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 
 " ACK plugin :) (grep but with lot more awesome)
 nmap <leader>a <Esc>:Ack!
@@ -186,8 +195,8 @@ map <Leader>vv <c-w><c-v>:e $MYVIMRC<cr>
 silent! !mkdir -p ~/.vim/backup
 silent! !mkdir -p ~/.vim/undo
 silent! !mkdir -p ~/.vim/swap
-set backup
-set backupdir=~/.vim/backup//
+"set backup
+"set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 " Persistent undos (vim 7.3+)
 set undofile
@@ -304,6 +313,7 @@ let g:pymode_rope_completion = 0
 let g:pymode_rope = 1  " We have JEDI now!
 let g:pymode_rope_goto_definition_bind = '<leader>j'
 let g:pymode_rope_goto_def_newwin = 'vnew'
+let g:pymode_rope_regenerate_on_write = 0
 
 let g:ackprg="ack-grep -H --nogroup --column"
 " YouCompleteMe should not clash with UltiSnip's key mappings
@@ -321,3 +331,12 @@ let g:airline_powerline_fonts = 1
 
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+
+" Dont use selection when moving lines
+xnoremap <  <gv
+xnoremap >  >gv
+
+
