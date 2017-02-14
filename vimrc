@@ -99,6 +99,22 @@ Bundle 'reinh/vim-makegreen'
 Bundle 'jmcomets/vim-pony'
 Bundle 'drmikehenry/vim-fontsize'
 Bundle 'editorconfig/editorconfig-vim'
+" JSX Support (for React)
+Plugin 'mxw/vim-jsx'
+" New JavaScript Indent and Highlighter. Required for vim-jsx
+Plugin 'pangloss/vim-javascript'
+" Ansible
+Plugin 'pearofducks/ansible-vim'
+" Autoclosing brackets/paranthesis/...
+Plugin 'Raimondi/delimitMate'
+" CSS3 Support
+Plugin 'hail2u/vim-css3-syntax'
+" SASS/SCSS
+Plugin 'tpope/vim-haml'
+" Comments for multiple langs
+Plugin 'tomtom/tcomment_vim'
+" Syntastic! Syntax checking for all the languages ;-)
+Plugin 'scrooloose/syntastic'
 
 filetype plugin indent on     " required for Vundle 
 
@@ -121,7 +137,7 @@ set completeopt=menuone,longest,preview
 
 " NERD tree
 map <leader>n :NERDTreeToggle<CR>
-"map <Leader>n <plug>NERDTreeTabsToggle<CR>
+"map <Leader>n <plug>NERDTreTabsToggle<CR>
 
 "" ignnore .pyc files
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
@@ -313,7 +329,7 @@ let g:pymode_rope_completion = 0
 let g:pymode_rope = 1  " We have JEDI now!
 let g:pymode_rope_goto_definition_bind = '<leader>j'
 let g:pymode_rope_goto_def_newwin = 'vnew'
-let g:pymode_rope_regenerate_on_write = 0
+let g:pymode_rope_regenerate_on_write = 0 " prevent hanging on write
 
 let g:ackprg="ack-grep -H --nogroup --column"
 " YouCompleteMe should not clash with UltiSnip's key mappings
@@ -334,9 +350,18 @@ let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
+" Ignores for CtrlP
+let g:ctrlp_custom_ignore = '\v[\/]\.(DS_Storegit|hg|svn|optimized|compiled|node_modules)$'
 
 " Dont use selection when moving lines
 xnoremap <  <gv
 xnoremap >  >gv
 
 
+" Enable mouse support for console vim
+set mouse=a
+
+" Syntastic should use ESLint for JSX support
+let g:syntastic_javascript_checkers = ['eslint']
+" Inline JSX Support
+let g:jsx_ext_required = 0
