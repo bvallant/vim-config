@@ -218,6 +218,13 @@ set directory=~/.vim/swap//
 set undofile
 set undodir=~/.vim/undo//
 
+" case insensitive search
+set ignorecase
+set smartcase
+
+" Ever notice a slight lag after typing the leader key + command? This lowers the timeout.
+set timeoutlen=500
+
 " Thanks to John Resig for the following 2 things:
 "
 " Tell vim to remember certain things when we exit
@@ -352,6 +359,15 @@ let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 " Ignores for CtrlP
 let g:ctrlp_custom_ignore = '\v[\/]\.(DS_Storegit|hg|svn|optimized|compiled|node_modules)$'
+" Show more files in CTRL-P
+let g:ctrlp_max_height = 30
+let g:ctrlp_max_files = 75000
+let g:ctrlp_max_depth = 100
+let g:ctrlp_match_window_bottom = 0
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_dotfiles = 0
+let g:ctrlp_switch_buffer = 0
 
 " Dont use selection when moving lines
 xnoremap <  <gv
@@ -363,5 +379,11 @@ set mouse=a
 
 " Syntastic should use ESLint for JSX support
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_python_checkers = []
 " Inline JSX Support
 let g:jsx_ext_required = 0
+let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
