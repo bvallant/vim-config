@@ -43,62 +43,49 @@ map <c-right> :tabnext<CR>
 " cursor keys to move to next and previous buffer
 map <c-up> :bprev<CR>
 map <c-down> :bnext<CR>
-
-" Vundle
-" Brief help
-"
-" :BundleInstall  - install bundles (won't update installed)
-" :BundleInstall! - update if installed
-"
-" :Bundles foo    - search for foo
-" :Bundles! foo   - refresh cached list and search for foo
-"
-" :BundleClean    - confirm removal of unused bundles
-" :BundleClean!   - remove without confirmation
-"
-" see :h vundle for more details
-" or wiki for FAQ
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+filetype off " Vundle required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
-" My Bundles:
+" My Plugins:
 "
 " Repos on GitHub
 " ===============
 "
 " GIT integration
-" Bundle 'joker1007/vim-metarw-github-issues'
-Bundle 'tpope/vim-fugitive'
-Bundle 'syngan/vim-gitlab'
-" Bundle 'junegunn/vim-github-dashboard'
+" Plugin 'joker1007/vim-metarw-github-issues'
+Plugin 'tpope/vim-fugitive'
+Plugin 'syngan/vim-gitlab'
+" Plugin 'junegunn/vim-github-dashboard'
 " Deal with pairs of surroundings
-Bundle 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 " GIT Syntax
-Bundle 'tpope/vim-git'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'mileszs/ack.vim'
-Bundle 'ervandew/screen'
-Bundle 'sjl/gundo.vim'
-Bundle 'vim-scripts/vimwiki'
-Bundle 'klen/python-mode'
-Bundle 'othree/html5.vim'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'flazz/vim-colorschemes'
-Bundle 'SirVer/ultisnips'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'wavded/vim-stylus'
-Bundle 'honza/vim-snippets'
-Bundle 'kien/ctrlp.vim'
-Bundle 'bling/vim-airline'
-Bundle 'reinh/vim-makegreen'
-Bundle 'jmcomets/vim-pony'
-Bundle 'drmikehenry/vim-fontsize'
-Bundle 'editorconfig/editorconfig-vim'
+Plugin 'tpope/vim-git'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'mileszs/ack.vim'
+Plugin 'ervandew/screen'
+Plugin 'sjl/gundo.vim'
+Plugin 'vim-scripts/vimwiki'
+Plugin 'python-mode/python-mode'
+Plugin 'othree/html5.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'SirVer/ultisnips'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'wavded/vim-stylus'
+Plugin 'honza/vim-snippets'
+Plugin 'kien/ctrlp.vim'
+Plugin 'bling/vim-airline'
+Plugin 'reinh/vim-makegreen'
+Plugin 'jmcomets/vim-pony'
+Plugin 'drmikehenry/vim-fontsize'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'w0rp/ale'
 " JSX Support (for React)
 Plugin 'mxw/vim-jsx'
 " New JavaScript Indent and Highlighter. Required for vim-jsx
@@ -113,9 +100,7 @@ Plugin 'hail2u/vim-css3-syntax'
 Plugin 'tpope/vim-haml'
 " Comments for multiple langs
 Plugin 'tomtom/tcomment_vim'
-" Syntastic! Syntax checking for all the languages ;-)
-Plugin 'scrooloose/syntastic'
-
+call vundle#end() 
 filetype plugin indent on     " required for Vundle 
 
 " TaskList default mapping is <leader>t, which basically always
@@ -322,11 +307,13 @@ vmap <C-C> "+y
 
 
 " PYTHON MODE
+let g:pymode_python = 'python3'
 let g:pymode_virtualenv = 1
 let g:pymode_doc = 1
 let g:pymode_indent = 1
 let g:pymode_breakpoint=1
 let g:pymode_breakpoint_bind = '<leader>b'
+let g:pymode_lint = 0
 let g:pymode_lint_message = 1
 let g:pymode_lint_write = 1   " enable code checking on every save
 let g:pymode_run = 0          " Dont load the python run code within vim plugin
@@ -377,13 +364,30 @@ xnoremap >  >gv
 " Enable mouse support for console vim
 set mouse=a
 
-" Syntastic should use ESLint for JSX support
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_python_checkers = []
-" Inline JSX Support
-let g:jsx_ext_required = 0
-let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
-
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+
+" ALE Fixers (code formatters)
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['javascript.jsx'] = ['prettier']
+let g:ale_fixers['css'] = ['prettier']
+let g:ale_fixers['scss'] = ['prettier']
+let g:ale_fixers['python'] = ['yapf']
+
+let g:ale_python_pylint_options = '--disable=C0111,E1101,R0903'
+
+" ALE auto format on save
+let g:ale_fix_on_save = 1
+let g:ale_on_text_changed = 0
+" Create-React-App Type prettier settings
+let g:ale_javascript_prettier_options = '--single-quote --tab-width 4 --no-semi --trailing-comma all'
+let g:ale_css_prettier_options = '--single-quote --tab-width 4 --no-semi --trailing-comma all'
+let g:ale_scss_prettier_options = '--single-quote --tab-width 4 --no-semi --trailing-comma all'
+" ALE
+let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✗'
+highlight link ALEWarningSign String
+highlight link ALEErrorSign Title
+let g:airline#extensions#ale#enabled = 1
