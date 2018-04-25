@@ -375,7 +375,7 @@ let g:ale_fixers['javascript.jsx'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_fixers['scss'] = ['prettier']
 let g:ale_fixers['python'] = ['yapf']
-
+let g:ale_virtualenv_dir_names = ['.virtualenvs']
 let g:ale_python_pylint_options = '--disable=C0111,E1101,R0903'
 
 " ALE auto format on save
