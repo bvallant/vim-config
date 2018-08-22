@@ -6,7 +6,7 @@
 set nocompatible     " be iMproved
 filetype off         " required for Vundle
 
-set foldmethod=indent
+set foldmethod=manual
 set foldlevel=99
 let mapleader = ","
 
@@ -59,31 +59,29 @@ Plugin 'VundleVim/Vundle.vim'
 " GIT integration
 " Plugin 'joker1007/vim-metarw-github-issues'
 Plugin 'tpope/vim-fugitive'
-Plugin 'syngan/vim-gitlab'
+" Plugin 'syngan/vim-gitlab'
 " Plugin 'junegunn/vim-github-dashboard'
 " Deal with pairs of surroundings
-Plugin 'tpope/vim-surround'
+" Plugin 'tpope/vim-surround'
 " GIT Syntax
 Plugin 'tpope/vim-git'
+Plugin 'ternjs/tern_for_vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
+" Plugin 'scrooloose/nerdcommenter'
 Plugin 'mileszs/ack.vim'
-Plugin 'ervandew/screen'
+" Plugin 'ervandew/screen'
 Plugin 'sjl/gundo.vim'
 Plugin 'vim-scripts/vimwiki'
-Plugin 'python-mode/python-mode'
+" Plugin 'python-mode/python-mode'
 Plugin 'othree/html5.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'SirVer/ultisnips'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'wavded/vim-stylus'
 Plugin 'honza/vim-snippets'
-Plugin 'kien/ctrlp.vim'
+" Plugin 'kien/ctrlp.vim'
+Plugin 'junegunn/fzf'
 Plugin 'bling/vim-airline'
-Plugin 'reinh/vim-makegreen'
-Plugin 'jmcomets/vim-pony'
-Plugin 'drmikehenry/vim-fontsize'
+" Plugin 'drmikehenry/vim-fontsize'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'w0rp/ale'
 " JSX Support (for React)
@@ -93,7 +91,7 @@ Plugin 'pangloss/vim-javascript'
 " Ansible
 Plugin 'pearofducks/ansible-vim'
 " Autoclosing brackets/paranthesis/...
-Plugin 'Raimondi/delimitMate'
+" Plugin 'Raimondi/delimitMate'
 " CSS3 Support
 Plugin 'hail2u/vim-css3-syntax'
 " SASS/SCSS
@@ -109,6 +107,10 @@ filetype plugin indent on     " required for Vundle
 nmap <leader>do <Plug>TaskList
 
 map <leader>g :GundoToggle<CR>
+map <leader>t :FZF<CR>
+map <leader>g :GundoToggle<CR>
+nnoremap <leader>j :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
 
 " disable pyflakes quickfix window
 let g:pyflakes_use_quickfix = 0
@@ -327,6 +329,8 @@ let g:pymode_rope_regenerate_on_write = 0 " prevent hanging on write
 
 let g:ackprg="ack-grep -H --nogroup --column"
 " YouCompleteMe should not clash with UltiSnip's key mappings
+let g:ycm_server_use_vim_stdout = 1
+let g:ycm_server_log_level = 'debug'
 let g:ycm_key_list_select_completion = ['<Down>']
 
 " Move lines with alt j/k
@@ -374,17 +378,18 @@ let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['javascript.jsx'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_fixers['scss'] = ['prettier']
-let g:ale_fixers['python'] = ['yapf']
+let g:ale_fixers['python'] = ['black']
 let g:ale_virtualenv_dir_names = ['.virtualenvs']
 let g:ale_python_pylint_options = '--disable=C0111,E1101,R0903'
-
+let g:ale_cache_executable_check_failures = 1
 " ALE auto format on save
 let g:ale_fix_on_save = 1
 let g:ale_on_text_changed = 0
 " Create-React-App Type prettier settings
-let g:ale_javascript_prettier_options = '--single-quote --tab-width 4 --no-semi --trailing-comma all'
-let g:ale_css_prettier_options = '--single-quote --tab-width 4 --no-semi --trailing-comma all'
-let g:ale_scss_prettier_options = '--single-quote --tab-width 4 --no-semi --trailing-comma all'
+let g:ale_javascript_prettier_options = '--single-quote --tab-width 2 --trailing-comma all'
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_css_prettier_options = '--single-quote --tab-width 2 --no-semi --trailing-comma all'
+let g:ale_scss_prettier_options = '--single-quote --tab-width 2 --no-semi --trailing-comma all'
 " ALE
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
